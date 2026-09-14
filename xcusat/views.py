@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Chat, Message
-from ollama import chat
+import os
+from ollama import Client
+
 
 
 def home(request):
@@ -40,8 +42,9 @@ def home(request):
                     "content": message.content
                 })
 
-            response = chat(
-                model="gemma4:cloud",
+            client = Client(host=os.environ.get("OLLAMA_HOST", "http://localhost:11434"))
+            response = client.chat(
+                model=os.environ.get("OLLAMA_MODEL", "gemma4:cloud"),
                 messages=ollama_messages
             )
 
