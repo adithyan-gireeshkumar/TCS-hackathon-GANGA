@@ -1,21 +1,31 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
+# Python virtual environments
 .venv/
 venv/
-ENV/
 env/
 
-# Environment variables
+# Python generated files
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+
+# Environment variables and local configuration
 .env
+.env.*
+!.env.example
 
-# Data
-data/*.csv
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
 
-# Streamlit
-.streamlit/
-
-# OS
+# OS metadata
 .DS_Store
 Thumbs.db
+.env
+.venv/
+__pycache__/
+*.pyc
+uploads/
