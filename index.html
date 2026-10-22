@@ -1,19 +1,98 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ganga</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>GANGA — Document Analyst</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
 </head>
 <body>
-    <div class="container">
-        <div class="chat-area"></div>
-        <div class="input-area">
-            <form >
-                <textarea id="user-input" placeholder="Ask Ganga..."></textarea>
-            <button id="send-button">Send</button>
-            </form>
+  <header class="topbar">
+    <a class="brand" href="/">GANGA<span>.</span></a>
+    <span class="status"><i></i> AI DOCUMENT ANALYST</span>
+  </header>
+
+  <main class="workspace">
+    <section class="intro">
+      <p class="eyebrow">YOUR DOCUMENTS, UNDERSTOOD</p>
+      <h1>Find the signal<br>in your <span>documents.</span></h1>
+      <p class="subtitle">
+        Upload a collection of files. Ask questions. Discover what the
+        documents actually tell you.
+      </p>
+    </section>
+
+    <form id="analysis-form">
+      <section class="panel upload-panel">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">01 / SOURCE MATERIAL</p>
+            <h2>Document collection</h2>
+          </div>
+          <span id="file-count" class="muted">0 files</span>
         </div>
-    </div>
+
+        <label class="dropzone" for="documents">
+          <span class="upload-icon">↑</span>
+          <strong>Drop your files here</strong>
+          <span class="muted">or click to browse</span>
+          <span class="file-types">PDF · DOCX · TXT · CSV · Max 15 MB total</span>
+        </label>
+
+        <input
+          id="documents"
+          name="documents"
+          type="file"
+          accept=".pdf,.docx,.txt,.csv"
+          multiple
+          hidden
+        >
+
+        <ul id="file-list" class="file-list"></ul>
+      </section>
+
+      <section class="panel question-panel">
+        <p class="eyebrow">02 / ASK GANGA</p>
+        <label for="question" class="question-label">
+          What do you want to find out?
+        </label>
+
+        <textarea
+          id="question"
+          name="question"
+          rows="3"
+          placeholder="Compare these reports. What changed, and what are the key findings?"
+          required
+        ></textarea>
+
+        <div class="form-footer">
+          <span class="muted">Answers are generated from your uploaded files.</span>
+          <button id="analyze-button" type="submit">
+            Analyze documents <span>↗</span>
+          </button>
+        </div>
+      </section>
+    </form>
+
+    <section id="result-panel" class="panel result-panel" hidden>
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">03 / ANALYSIS</p>
+          <h2>Your findings</h2>
+        </div>
+        <button id="copy-button" class="secondary-button" type="button">
+          Copy answer
+        </button>
+      </div>
+      <p id="result-meta" class="muted"></p>
+      <div id="answer" class="answer"></div>
+    </section>
+
+    <p id="error-message" class="error-message" role="alert"></p>
+
+    <footer>GANGA · A simple AI-powered document analyst</footer>
+  </main>
 </body>
 </html>
